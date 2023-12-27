@@ -15,6 +15,7 @@ function AddCard() {
     const [newCard, setNewCard] = useState(initialState);
     const [deck, setDeck] = useState({});
 
+    // Setting deck info when adding new card
     useEffect(() => {
         const abortController = new AbortController();
         readDeck(deckId, abortController.signal)
@@ -24,6 +25,7 @@ function AddCard() {
         return () => abortController.abort();
     }, [deckId]);
 
+    // Setting new card info
     function handleCardChange({ target }) {
         setNewCard({
             ...newCard,
@@ -31,6 +33,7 @@ function AddCard() {
         });
     }
 
+    // Submit to add new card
     async function handleSubmit(event) {
         event.preventDefault();
         const abortController = new AbortController();
@@ -62,9 +65,7 @@ function AddCard() {
             <form onSubmit={handleSubmit}>
                 <h2>{deck.name}: Add Card</h2>
                 <CardForm card={newCard} handleCardChange={handleCardChange} />
-                <button
-                    className="btn btn-secondary mx-1"
-                    onClick={() => handleDone()}>
+                <button className="btn btn-secondary mx-1" onClick={() => handleDone()}>
                     Done
                 </button>
                 <button className="btn btn-primary mx-1" type="submit">

@@ -22,6 +22,7 @@ function EditCard() {
     const [card, setCard] = useState(initialDeckState);
     const [deck, setDeck] = useState(initialCardState);
 
+    // Setting deck and card info to be edited
     useEffect(() => {
         const abortController = new AbortController();
         readDeck(deckId, abortController.signal)
@@ -35,6 +36,7 @@ function EditCard() {
         return () => abortController.abort();
     }, [deckId, cardId]);
 
+    // Update new info of card
     function handleCardChange({ target }) {
         setCard({
             ...card,
@@ -42,6 +44,7 @@ function EditCard() {
         });
     }
 
+    // Submit updated card info
     function handleSubmit(event) {
         event.preventDefault();
         const abortController = new AbortController();
@@ -49,6 +52,7 @@ function EditCard() {
         .then(() => history.push(`/decks/${deckId}`));
     }
 
+    // Cancel editing and back to the deck
     async function handleCancel() {
         history.push(`/decks/${deckId}`);
     }

@@ -10,6 +10,7 @@ function Study() {
     const [front, isFront] = useState(true);
     const history = useHistory();
 
+    // Setting deck and cards info to study
     useEffect(() => {
         async function fetchData() {
             const abortController = new AbortController();
@@ -21,8 +22,9 @@ function Study() {
             };
         }
         fetchData();
-    }, []);
+    }, [deckId]);
 
+    // Move to next card, after the last card, ask either restart or move back to home screen
     function nextCard(index, total) {
         console.log(index);
         if (index < total) {
@@ -42,6 +44,7 @@ function Study() {
         }
     }
 
+    // Flip card to show back side
     function flipCard() {
         if (front) {
             isFront(false);
@@ -50,6 +53,7 @@ function Study() {
         }
     }
 
+    // Once flip button is clicked, display next button
     function showNextButton(cards, index) {
         if (front) {
             return null;
@@ -65,6 +69,7 @@ function Study() {
         }
     }
 
+    // Show study screen when there are enough cards
     function enoughCards() {
         return (
             <div className="card">
@@ -93,6 +98,7 @@ function Study() {
         );
     }
 
+    // Show not enough card screen when there are less than 3 cards in the deck
     function notEnoughCards() {
         return (
             <div>

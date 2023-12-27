@@ -49,8 +49,8 @@
     },
     {
       "cards": [],
-      "front": "b",
-      "back": "b",
+      "front": "Card 7 Front",
+      "back": "Card 7 Back",
       "deckId": 1,
       "id": 7
     },

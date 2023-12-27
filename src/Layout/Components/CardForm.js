@@ -13,8 +13,7 @@ function CardForm({ card, handleCardChange }) {
           placeholder="Front side of card"
           rows="3"
           onChange={handleCardChange}
-          value={card.front}
-        />
+          value={card.front} />
       </div>
       <div className="form-group">
         <label htmlFor="back">Back</label>
@@ -25,8 +24,7 @@ function CardForm({ card, handleCardChange }) {
           placeholder="Back side of card"
           rows="3"
           onChange={handleCardChange}
-          value={card.back}
-        />
+          value={card.back} />
       </div>
     </div>
   );

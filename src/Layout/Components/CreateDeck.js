@@ -10,6 +10,7 @@ function CreateDeck() {
     };
     const [newDeck, setNewDeck] = useState(initialState);
 
+    // Function updating the change of both deck name and deck description
     function handleChange({ target }) {
         setNewDeck({
             ...newDeck,
@@ -17,6 +18,7 @@ function CreateDeck() {
         });
     }
 
+    // Function submitting new deck to create
     async function handleSubmit(event) {
         event.preventDefault();
         const abortController = new AbortController();
@@ -28,6 +30,7 @@ function CreateDeck() {
         return response;
     }
 
+    // When cancel button is clicked, cancel creating deck and move to home screen
     async function handleCancel() {
         history.push("/");
     }
@@ -48,10 +51,10 @@ function CreateDeck() {
                         id="name"
                         name="name"
                         className="form-control"
+                        placeholder="Deck Name"
                         onChange={handleChange}
                         type="text"
-                        value={newDeck.name}
-                    />
+                        value={newDeck.name} />
                 </div>
                 <div className="form-group">
                     <label>Description</label>
@@ -59,15 +62,12 @@ function CreateDeck() {
                         id="description"
                         name="description"
                         className="form-control"
+                        placeholder="Brief description of the deck"
                         onChange={handleChange}
                         type="text"
-                        value={newDeck.description}
-                    />
+                        value={newDeck.description} />
                 </div>
-                <button
-                    className="btn btn-secondary mx-1"
-                    onClick={() => handleCancel()}
-                >
+                <button className="btn btn-secondary mx-1" onClick={() => handleCancel()}>
                     Cancel
                 </button>
                 <button className="btn btn-primary mx-1" type="submit">

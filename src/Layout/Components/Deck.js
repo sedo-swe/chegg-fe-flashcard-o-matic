@@ -8,14 +8,12 @@ function Deck() {
     const [deck, setDeck] = useState({});
     const [cards, setCards] = useState([]);
 
+    // Loading the selected deck info from the API fetch
     useEffect(() => {
         async function fetchData() {
             const abortController = new AbortController();
             try {
-                const deckResponse = await readDeck(
-                    deckId,
-                    abortController.signal
-                );
+                const deckResponse = await readDeck( deckId, abortController.signal );
                 setDeck(deckResponse);
                 setCards(deckResponse.cards);
             } catch (error) {
@@ -26,8 +24,9 @@ function Deck() {
             };
         }
         fetchData();
-    }, []);
+    }, [deckId]);
 
+    // When delete button is clicked, delete the deck
     async function handleDeleteDeck(deck) {
         if (
             window.confirm(
@@ -47,11 +46,10 @@ function Deck() {
         }
     }
 
+    // When delete button is clicked, delete the card
     async function handleDeleteCard(card) {
         if (
-            window.confirm(
-                `Delete this card? You will not be able to recover it`
-            )
+            window.confirm( `Delete this card? You will not be able to recover it` )
         ) {
             const abortController = new AbortController();
             try {
@@ -66,18 +64,22 @@ function Deck() {
         }
     }
 
+    // When edit deck button is clicked, move to edit deck screen
     async function handleEditDeck() {
         history.push(`/decks/${deckId}/edit`);
     }
 
+    // When study button is clicked, move to study screen
     async function handleStudy() {
         history.push(`/decks/${deckId}/study`);
     }
 
+    // When add card button is clicked, move to add card screen
     async function handleAddCard() {
         history.push(`/decks/${deckId}/cards/new`);
     }
 
+    // When edit card button is clicked, move to edit card screen
     async function handleEditCard(card) {
         history.push(`/decks/${deckId}/cards/${card.id}/edit`);
     }
@@ -95,28 +97,16 @@ function Deck() {
                     <div className="card-body">
                         <h2 className="card-title">{deck.name}</h2>
                         <p>{deck.description}</p>
-                        <button
-                            onClick={() => handleEditDeck()}
-                            className="btn btn-secondary mx-1"
-                        >
+                        <button onClick={() => handleEditDeck()} className="btn btn-secondary mx-1">
                             Edit
                         </button>
-                        <button
-                            onClick={() => handleStudy()}
-                            className="btn btn-primary mx-1"
-                        >
+                        <button onClick={() => handleStudy()} className="btn btn-primary mx-1">
                             Study
                         </button>
-                        <button
-                            onClick={() => handleAddCard()}
-                            className="btn btn-primary mx-1"
-                        >
+                        <button onClick={() => handleAddCard()} className="btn btn-primary mx-1">
                             Add Cards
                         </button>
-                        <button
-                            onClick={() => handleDeleteDeck(deck)}
-                            className="btn btn-danger mx-1"
-                        >
+                        <button onClick={() => handleDeleteDeck(deck)} className="btn btn-danger mx-1">
                             Delete
                         </button>
                     </div>
@@ -132,18 +122,10 @@ function Deck() {
                                         <div className="col">{card.back}</div>
                                     </div>
                                     <div className="container row">
-                                        <button
-                                            onClick={() => handleEditCard(card)}
-                                            className="btn btn-secondary mx-1"
-                                        >
+                                        <button onClick={() => handleEditCard(card)} className="btn btn-secondary mx-1">
                                             Edit
                                         </button>
-                                        <button
-                                            onClick={() =>
-                                                handleDeleteCard(card)
-                                            }
-                                            className="btn btn-danger mx-1"
-                                        >
+                                        <button onClick={() => handleDeleteCard(card)} className="btn btn-danger mx-1">
                                             Delete
                                         </button>
                                     </div>

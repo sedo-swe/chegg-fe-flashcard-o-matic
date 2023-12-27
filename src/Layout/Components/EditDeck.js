@@ -12,6 +12,7 @@ function EditDeck() {
     };
     const [deck, setDeck] = useState(initialDeckState);
 
+    // Setting the deck info to be edited
     useEffect(() => {
         const abortController = new AbortController();
         readDeck(deckId, abortController.signal)
@@ -19,8 +20,9 @@ function EditDeck() {
         .catch((error) => console.log("Something went wrong", error));
 
         return () => abortController.abort();
-    }, []);
+    }, [deckId]);
 
+    // Update info for the deck
     function handleChange({ target }) {
         setDeck({
             ...deck,
@@ -28,6 +30,7 @@ function EditDeck() {
         });
     }
 
+    // Submit updated deck info
     async function handleSubmit(event) {
         event.preventDefault();
         const abortController = new AbortController();
@@ -36,6 +39,7 @@ function EditDeck() {
         return response;
     }
 
+    // Cancel editing
     async function handleCancel() {
         history.push(`/decks/${deckId}`);
     }
